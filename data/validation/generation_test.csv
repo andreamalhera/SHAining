@@ -1,0 +1,5 @@
+log,n_traces,ratio_variants_per_number_of_traces,target_similarity,trace_len_min
+genEL1_990_nan_nan,99.0,,1.0,
+genEL3_nan_099_nan,,1.0,0.9900990099009901,
+genEL4_990_nan_10,99.0,,1.0,1.0
+genEL5_nan_nan_10,,,1.0,1.0

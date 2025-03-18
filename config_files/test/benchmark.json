@@ -1,0 +1,10 @@
+[
+  {
+    "pipeline_step": "benchmark_test",
+    "benchmark_test": "discovery",
+    "input_path":"data/test/benchmark_test",
+    "output_path":"output",
+    "timeout": 43200,
+    "miners" : ["ilp","heuristics","inductive","imf","sm1","sm2"]
+  }
+]

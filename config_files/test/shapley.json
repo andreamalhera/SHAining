@@ -1,0 +1,10 @@
+[
+    {
+      "pipeline_step": "shapley_computation",
+      "input_path":"data/9_aq1_eav_ekbr3_nusa_rt5v_svo_saq1_benchmark.csv",
+      "output_path":"output",
+      "feature_names": ["aq1", "eav", "ekbr3", "nusa", "rt5v", "svo", "saq1", "tlkh", "tlv"],
+      "miners": ["sm1","imf"]
+    }
+  ]
+  

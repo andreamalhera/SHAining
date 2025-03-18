@@ -1,0 +1,12 @@
+# METRICS_PATH = 'metrics_path'
+# FEATURES_PATH='features_path'
+# EVALUATION_METRICS='evaluation_metrics'
+# EVENTLOG_FEATURES='eventlog_features'
+# METHODS = 'methods'
+# MODEL = 'model'
+# AGGREGATION = 'aggregation'
+
+INPUT_PATH = 'input_path'
+OUTPUT_PATH = 'output_path'
+FEATURE_NAMES = 'feature_names'
+MINERS = 'miners'

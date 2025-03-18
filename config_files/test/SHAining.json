@@ -1,0 +1,27 @@
+[
+{
+   "pipeline_step": "shaining_task",
+   "contestants": ["sm1","imf", "ilp", "sm2", "heuristics", "inductive"],
+   "feature_names":  ["n_traces","ratio_variants_per_number_of_traces","trace_len_min"],
+   "feature_values":[[99.0, 998.4],
+	             [0.99, 1.19],
+		     [1.0, 1.2]
+                    ],
+   "system_params":{"generator_params":{
+                        "config_space":{"mode": [ 5, 20],
+                                        "sequence": [ 0.01, 1],
+                                        "choice": [ 0.01, 1],
+                                        "parallel": [ 0.01, 1],
+                                        "loop": [ 0.01, 1],
+                                        "silent": [ 0.01, 1],
+                                        "lt_dependency": [ 0.01, 1],
+                                        "num_traces": [ 10, 100],
+                                        "duplicate": [ 0], "or": [ 0]},
+                        "n_trials": 50,
+                        "output_path": "output/run/shaining_test"
+                        },
+                    "similarity_threshold": 0.8,
+                    "output_path": "output"
+                    }
+	}
+	]
