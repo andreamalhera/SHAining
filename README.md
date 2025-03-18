@@ -170,6 +170,4 @@ To visualise the trends between features and the Shapley values, we use a beeswa
 Includes measurements boxplots, shapley value boxplots and dedicated beeswarm plots.
 
 ## References
-- [GEDI](https://github.com/lmu-dbs/gedi/tree/bpm24)
-- [Shapley](https://papers.nips.cc/paper_files/paper/2017/file/8a20a8621978632d76c43dfd28b67767-Paper.pdf)
-- [FEEED](https://github.com/lmu-dbs/feeed)
+Anonymous
