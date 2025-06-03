@@ -8,6 +8,7 @@ Codebase for the paper "SHAining a Light on Feature Impact for Automated Process
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Pipeline](#pipeline)
+    - [Feature Selection](#feature-selection) 
     - [Event Log Generation](#event-log-generation)
     - [Process Discovery](#process-discovery)
     - [Feature Impact Calculation](#feature-impact-calculation)
@@ -102,8 +103,11 @@ Total number of possible logs: 26
 Completion can take a few minutes. Data and results of experiments from the paper can be found in the [data](data) directory.
 
 ## Pipeline 
-Our framework includes several steps: [Event Log Generation](#event-log-generation), [Process Discovery](#process-discovery), and [Feature Impact Calculation](#feature-impact-calculation).
-## Event Log Generation
+Our framework includes several steps: [Feature Selection](#feature-selection), [Event Log Generation](#event-log-generation), [Process Discovery](#process-discovery), and [Feature Impact Calculation](#feature-impact-calculation).
+### Feature Selection
+As mentioned in section 5.1 set-up and implementation details, we used event log characteristics from real event logs (BPI Challenges) to select features for our experiments. Alternatively, user can select any features of interest from [FEEED](https://github.com/lmu-dbs/feeed) or implement their own. For details about our greedy approach to select the features, please refer to [Feature Selection via Greedy Algorithm](notebooks/section5_greedy_feature_selection.ipynb). 
+
+### Event Log Generation
 After deciding on the EL features, the next step is to generate synthetic event logs that closely math the specified features. The event logs for this study are generated with the help of [GEDI](https://github.com/lmu-dbs/gedi/tree/bpm24). The logs are generated based on the features specified in the configuration file. 
 
 A sample code for generating event logs for a given config file is shown below:
@@ -119,7 +123,7 @@ The JSON file consists of the following key-value pairs:
     - config_space: here, we define the configuration of the generator module (here: process tree generator). The process tree generator can process input information which defines characteristics for the generated data. Please refer to the [GEDI documentation](https://github.com/lmu-dbs/gedi/tree/bpm24?tab=readme-ov-file#experiments) for more information on the configuration options.
     - n_trials: the maximum number of trials for the hyperparameter optimization to find a feasible solution to the specific configuration being used as the target
 
-## Extracting evaluation metrics with PD algorithms
+### Extracting evaluation metrics with PD algorithms
 Extracting evaluation metrics is a downstream task which is used for evaluating the goodness of the synthesized event log datasets with the metrics of real-world datasets. This repository supports the following PD algorithms:
 - [Inductive Miner](https://pm4py.fit.fraunhofer.de/documentation)
 - [Heuristics Miner](https://pm4py.fit.fraunhofer.de/documentation)
@@ -159,16 +163,20 @@ The JSON file consists of the following key-value pairs:
 ## Experiments
 To produce the experiment visualizations, we employ [jupyter notebooks](https://jupyter.org/install) and [add the installed environment to the jupyter notebook](https://medium.com/@nrk25693/how-to-add-your-conda-environment-to-your-jupyter-notebook-in-just-4-steps-abeab8b8d084). We then start all visualizations by running e.g.: `jupyter noteboook`. In the following, we describe the `.ipynb`-files in the folder `\notebooks` to reproduce the figures from our paper. 
 
+### Experimental Set Up:
 #### [Feature Selection via Greedy Algorithm:](notebooks/section5_greedy_feature_selection.ipynb) 
-As mentioned in section 5.1 set-up and implementation details.
-#### [Table 3:](notebooks/section5_RQ1_Table3_Figures3atog_rankings.ipynb) 
-Mean Shapley values and standard deviation of normalized values across evaluation metrics, ordered by feature impact variability.
-#### [Figures 3 (a)-(g):](notebooks/section5_RQ1_Table3_Figures3atog_rankings.ipynb)
-Feature impact ranking per metric and process discovery algorithm.
-#### [Figure 4:](notebooks/section5_RQ2_Figure4_beeswarm_plots.ipynb)
-To visualise the trends between features and the Shapley values, we use a beeswarm plot. The beeswarm plot is a one-dimensional scatter plot that arranges data points in a single line. The plot is used to show the distribution of Shapley values for each feature. The beeswarm plot is created using matplotlib and Seaborn library in Python. The plot is used to identify the features that have the most significant impact on the performance of the PD algorithms.
-#### [Fitness Analysis for Inductive and ILP miner:](notebooks/section5_RQ2_fitness_ilp_ind_analysis.ipynb)
-Includes measurements boxplots, shapley value boxplots and dedicated beeswarm plots.
+As mentioned in section 5.1 set-up and implementation details, we used event log characteristics from real event logs ("BPI Challenges") to select features for our experiments.
+#### [Feature Analysis:](notebooks/section5_setup_datasets.ipynb)
+Statistics about the event log statistics and event log characteristics.
+#### [Metric Evaluation and Shapley Value Statistics:](notebooks/section5_setup_processDiscovery_metricEvaluation_shapleyValueStats.ipynb)
+Statistics about all metric evaluation results (fitness, precision,etc.) for analyzed algorithms, as well as all their Shapley Values per feature value combination.
+
+### Paper Figures:
+#### [Figures 3-4:](notebooks/section5_RQ1_Figure3and4_coordinatePlot_CDdiagram.ipynb) 
+CD diagrams showing significant (meta-)features contributions per Process Discovery algorithm across all metrics
+#### [Figures 5 (a)-(c):](notebooks/section5_RQ2_Figure5_HeatplotBucket_shapleyValues.ipynb)
+Relations between feature values and Shapley values in terms of algorithm robustness, correlations and feasibility.
+
 
 ## References
 Anonymous
