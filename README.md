@@ -19,10 +19,11 @@ Process mining is a powerful technique for automatically monitoring and enhancin
 
 The SHAining pipeline consists of three main steps: ED generation, Benchmarking, and Feature impact calculation. In the ED generation step, logs are generated based on specific feature values. The benchmarking step evaluates the performance of PD algorithms on the generated logs, while the last step analyzes the impact of features on the algorithm's performance. The pipeline is designed to be modular, allowing for easy integration of new PD algorithms and feature sets. SHAining is implemented in Python and is available as an open-source repository.
 
-Following data artefacts are included in this paper: 
+The generated data used for this paper, and the results of the experiments, can be found in the respective [Zenodo Artifact](https://zenodo.org/records/15047390). 
+Following data artefacts are included in this repository:
 ```
 data/
-├── bpm_25
+├── icpm_25
 │   ├── 8fts_3miners_ind_ilp_sm1_benchmark.csv # Contains benchmarking results from paper
 │   ├── 8fts_3miners_ind_ilp_sm1_shapley.csv # Contains shapley value results from paper
 │   ├── 8fts_genEL_features.csv # Contains features of generated logs
