@@ -65,9 +65,24 @@ if __name__ == "__main__":
     parser.add_argument('similarity_threshold', type=float, help='The path to the original config file for generation')
     args = parser.parse_args()
 
-def describe_shapley_experiments(data, feature_names, similarity_threshold=0.0):
+def describe_from_benchmark(data, feature_names):
+    total_feasible = 0
+    if 'log' not in data.columns:
+        raise ValueError("log column not found in data")
+    benchmark_cols = [col for col in data.columns if "_" in col]
+    for bcol in benchmark_cols:
+        data_selection = data[['log', bcol]]
+        data_selection['target_similarity'] = 1.0
+        #data_selection = data_selection.dropna()
+        feasible_experiments = describe_from_features(data_selection, feature_names)
+        total_feasible += len(feasible_experiments)
+
+    print(f"Total feasible experiments: {total_feasible}")
+
+
+def describe_from_features(data, feature_names, similarity_threshold=0.0):
     #feature_names = ['aq1', 'ekbr3', 'nusa', 'rt5v', 'svo', 'saq1', 'tlkh', 'tlv']
-    data = data.dropna()
+    #data = data.dropna()
     if similarity_threshold == 0.0:
         data['target_similarity'] = data.get('target_similarity', 1.0)
     data = data[data['target_similarity'] >= float(similarity_threshold)]
@@ -145,6 +160,7 @@ def describe_shapley_experiments(data, feature_names, similarity_threshold=0.0):
 
     print(f"INFO: Number of experiments per feature selection ({len(key_combinations)} different combinations):", key_combinations)
     counts_values_per_feature(feasible_experiments)
+    return feasible_experiments
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Counts for possible shapley experimets given generated ELs with target similarity over threshold.')
@@ -154,4 +170,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     data = pd.read_csv(args.genEL_feats)
-    describe_shapley_experiments(data, args.feature_names, args.similarity_threshold)
+    if 'target_similarity' in data.columns:
+        describe_from_features(data, args.feature_names, args.similarity_threshold)
+    else:
+        describe_from_benchmark(data, args.feature_names)
+    #describe_shapley_experiments(data, args.feature_names, args.similarity_threshold)
